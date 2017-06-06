@@ -1,49 +1,84 @@
-/**
- * Hockey is the game. Make it happen.
- *
- * USEFUL RESOURCES
- * https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics
- * https://api.jquery.com/id-selector/
- * https://api.jquery.com/html/
- * https://api.jquery.com/css/
- * https://api.jquery.com/click/
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
- *
- * If you want to turn it into some other sport, have at it.
- *
- * Anyway, I have given you a basic HTML structure for a
- * BATTLE OF THE SPORTS GAME THING between these two rivals, and you
- * should make the page do what it needs to do, using your knowledge
- * of JS, HTML, CSS, and... sports.
- *
- * Here's what this 'game' should do:
- *
- * 1. Clicking a "SHOOT" button attempt to score against the opposing team.
- *   - shots have a random chance of succeeding or failing
- *   - number of shots taken should increase every click on the "SHOOT" button
- *   - number of hits obviously only increases when the shot is successful
- *
- * 2. Clicking the "RESET" button resets all the shot and score counters and
- * adds 1 to the number of resets
- *
- * 3. Any time a team shoots and scores change the background color of
- *    page to that teams color
- *
- * OPTIONAL STUFF:
- * - add logos of the two rivals below their name
- * - make the page just look better
- * - play a sound when someone clicks the "Shoot" button. You'll need to read about the <audio> element
- *   and how to use it in JS. You will also need to download a sound bite
- */
+
 
 (function(){
 
   //jQuery equivelent to window.onload = function{}
   //code in here wont run until page loads
   $(function(){
+    var teamoneButton = $("#teamone-shoot");
+    var teamtwoButton = $("#teamtwo-shoot");
+    var teamOneNumshots = $("#teamone-numshots");
+    var teamOneHits = $("#teamone-numhits");
+    var teamTwoButton = $("#teamtwo-shoot");
+    var teamTwoNumshots = $("#teamtwo-numshots");
+    var teamTwoHits = $("#teamtwo-numhits");
+    var resetButton = $("#reset");
+    var resetCount = $("#num-resets");
+    var background = $("#bodycolor");
+
+    teamoneButton.click(function(){
+      console.log("team one clicked")
+
+    var newTeamOneNumshots = parseInt(teamOneNumshots.html())+1;
+    teamOneNumshots.html(newTeamOneNumshots);
+
+    if (newTeamOneNumshots >= 0) {
+      var randomNumber = Math.random() >= 0.5;
+      if (randomNumber == 1) {
+        var newTeamOneHits = parseInt(teamOneHits.html()) + 1;
+        teamOneHits.html(newTeamOneHits);
+        background.css({
+          background: "pink"
+        });
+
+      }
+    }
+
+  }); //closes team one hits
+
+  teamTwoButton.click(function(){
+    console.log("team one clicked")
+
+  var newTeamTwoNumshots = parseInt(teamTwoNumshots.html())+1;
+  teamTwoNumshots.html(newTeamTwoNumshots);
+
+  if (newTeamTwoNumshots >= 0) {
+    var randomNumber = Math.random() >= 0.5;
+    if (randomNumber == 1) {
+      var newTeamTwoHits = parseInt(teamTwoHits.html()) + 1;
+      teamTwoHits.html(newTeamTwoHits);
+      background.css({
+        background: "blue"
+      });
+    }
+  }
+
+}); //closes team two hits
+
+resetButton.click(function() {
+  console.log("reset clicked");
+
+  var newResetCount = parseInt(resetCount.html()) + 1;
+  resetCount.html(newResetCount);
+
+  var resetTeamOneNumshots = parseInt(teamOneNumshots.html()) * 0;
+  teamOneNumshots.html(resetTeamOneNumshots);
+
+  var resetTeamOneHits = parseInt(teamOneHits.html()) * 0;
+  teamOneHits.html(resetTeamOneHits);
+
+  var resetTeamTwoNumshots = parseInt(teamTwoNumshots.html()) * 0;
+  teamTwoNumshots.html(resetTeamTwoNumshots)
+
+  var resetTeamTwoHits = parseInt(teamTwoHits.html()) * 0;
+  teamTwoHits.html(resetTeamTwoHits);
+
+
+})
 
 
 
-  })
 
-})();
+  }); //jq
+
+})(); //self

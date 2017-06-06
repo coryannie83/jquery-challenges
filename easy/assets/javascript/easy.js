@@ -1,4 +1,4 @@
-(function(){
+(function() {
   /**
    * Using the LocalStorage API, save the contents of the text box
    * when users click the "save" button.
@@ -18,6 +18,15 @@
   var saveButton = $('#save-button');
   var loadButton = $('#load-button');
 
+  saveButton.click(function(){
+    console.log(getText());
+    localStorage.setItem('myCat', getText());
+  })
+
+  loadButton.click(function(){
+    console.log("clicked");
+    setText(localStorage.getItem('myCat'));
+  })
   /**
    * Gets the text from the element for you
    * @return {String}
@@ -26,11 +35,12 @@
     return $('#save-me').val();
   }
 
-  /**
-   * Puts different text
-   * @param {String} text the stuff you want to put in the box
-   */
-  function setText(text) {
-    return $('#save-me').val(text);
-  }
+    /**
+     * Puts different text
+     * @param {String} text the stuff you want to put in the box
+     */
+    function setText(text) {
+      return $('#save-me').val(text);
+    }
+
 })();
